@@ -36,10 +36,8 @@ jobs:
             **/Thumbs.db
 
   deploy-production:
-    name: 🌐 Deploy to Main Live Server
+    name: 🌐 Deploy to Main Live Server (public_html/move)
     runs-on: ubuntu-latest
-    # Automatically runs when PROD_FTP_SERVER secret is provided in GitHub repository
-    if: ${{ secrets.PROD_FTP_SERVER != '' }}
     steps:
       - name: 🚚 Checkout latest code
         uses: actions/checkout@v4
@@ -47,6 +45,9 @@ jobs:
           fetch-depth: 2
 
       - name: 🚀 Sync files to main live server via FTP
+        env:
+          PROD_SERVER: ${{ secrets.PROD_FTP_SERVER }}
+        if: ${{ env.PROD_SERVER != '' }}
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.PROD_FTP_SERVER }}
@@ -64,4 +65,5 @@ jobs:
             **/error_log
             **/.DS_Store
             **/Thumbs.db
+
 
