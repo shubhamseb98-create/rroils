@@ -11177,12 +11177,12 @@
 	/* 5. Description Text */
 	.clean-milestone-desc {
 		font-family: 'DM Sans', sans-serif;
-		font-size: 10.5px;
-		line-height: 1.35;
+		font-size: 11px;
+		line-height: 1.4;
 		color: #495057;
 		font-weight: 500;
 		margin: 0 auto;
-		max-width: 105px;
+		max-width: 110px;
 		word-break: normal;
 		padding: 0 1px;
 	}
