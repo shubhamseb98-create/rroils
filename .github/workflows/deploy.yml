@@ -1,4 +1,4 @@
-name: Deploy to Live Testing Server
+name: Deploy to Testing and Main Live Servers
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   workflow_dispatch: # Allows manual one-click deployment from GitHub UI
 
 jobs:
-  web-deploy:
-    name: Sync files via FTP
+  deploy-testing:
+    name: 🧪 Deploy to Testing Server (seotycoons.in/rroil)
     runs-on: ubuntu-latest
     steps:
       - name: 🚚 Checkout latest code
@@ -24,8 +24,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT || 21 }}
           protocol: ftp
-          # If your FTP account is locked to public_html/rroil, use './'.
-          # If using main cPanel account, set secret FTP_SERVER_DIR to 'public_html/rroil/'
           server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
           exclude: |
             **/.git*
@@ -36,3 +34,34 @@ jobs:
             **/error_log
             **/.DS_Store
             **/Thumbs.db
+
+  deploy-production:
+    name: 🌐 Deploy to Main Live Server
+    runs-on: ubuntu-latest
+    # Automatically runs when PROD_FTP_SERVER secret is provided in GitHub repository
+    if: ${{ secrets.PROD_FTP_SERVER != '' }}
+    steps:
+      - name: 🚚 Checkout latest code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 🚀 Sync files to main live server via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.PROD_FTP_SERVER }}
+          username: ${{ secrets.PROD_FTP_USERNAME }}
+          password: ${{ secrets.PROD_FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ftp
+          server-dir: ${{ secrets.PROD_FTP_SERVER_DIR || 'public_html/move/' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/*.zip
+            **/*.sql
+            **/error_log
+            **/.DS_Store
+            **/Thumbs.db
+

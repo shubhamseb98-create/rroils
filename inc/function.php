@@ -34,7 +34,9 @@ $dbusername = "rroils_user";
 $dbpassword = "tGAn&1+)ja[I";
 $dbname="rroils_db";
 @define('SITE_NAME', 'RROils');
-@define('SITE_URL', 'https://rroils.com/');
+// Live setup subfolder: https://rroils.com/move/
+$isMoveFolder = (isset($_SERVER['REQUEST_URI']) && strpos($_SERVER['REQUEST_URI'], '/move') !== false) || (isset($_SERVER['SCRIPT_NAME']) && strpos($_SERVER['SCRIPT_NAME'], '/move') !== false);
+@define('SITE_URL', $isMoveFolder ? 'https://rroils.com/move/' : 'https://rroils.com/move/');
 @define('SITE_EMAIL', 'rroils@gmail.com');
 }
 
