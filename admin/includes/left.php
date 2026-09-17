@@ -45,7 +45,7 @@ $rowww = $resulltt->fetch_assoc();
 						</a>
 					</li>
 
-                     <li class="has-sub <?php if($first_part=="manage-banner.php" || $first_part=="add-banner.php" || $first_part=="edit-banner.php" || $first_part=="manage-clients.php" || $first_part=="add-clients.php" || $first_part=="edit-clients.php" || $first_part=="manage-testimonial-extra.php" || $first_part=="manage-catalog.php"|| $first_part=="manage-home-about.php" || $first_part=="manage-why-choose.php"){ echo "active"; } ?>">
+                      <li class="has-sub <?php if($first_part=="manage-banner.php" || $first_part=="add-banner.php" || $first_part=="edit-banner.php" || $first_part=="manage-clients.php" || $first_part=="add-clients.php" || $first_part=="edit-clients.php" || $first_part=="manage-testimonial-extra.php" || $first_part=="manage-catalog.php"|| $first_part=="manage-home-about.php" || $first_part=="manage-why-choose.php" || $first_part=="manage-started.php" || $first_part=="add-started.php" || $first_part=="edit-started.php"){ echo "active"; } ?>">
 						<a href="javascript:;">
 							<b class="caret"></b>
 							<i class="fa fa-home"></i>
@@ -60,6 +60,7 @@ $rowww = $resulltt->fetch_assoc();
                         	<li><a href="manage-why-choose.php">Work Management </a></li> 
                         	<li><a href="manage-manufacturing.php">Manufacturing Process </a></li> 
                         	<li><a href="manage-manufacturing-cta.php">Manufacturing CTA </a></li> 
+                        	<li><a href="manage-started.php">How We Started </a></li>
                         	<li><a href="manage-home-contact.php">Home Form Contact </a></li> 
                         	<!-- <li><a href="manage-acheivements.php">Achievements Manag..</a></li> -->
 							<li><a href="manage-home-extra.php">Home Text Management </a></li> 

@@ -152,6 +152,97 @@ if(mysqli_num_rows($tblWorkWithUs) > 0){
    <!-- ===== Why Choose Section End ===== -->
 
 <?php
+$tblPackageVariant = mysqli_query($conn, "SELECT * FROM tbl_package_variant LIMIT 1");
+if(mysqli_num_rows($tblPackageVariant) > 0) {
+    $packageVariant = mysqli_fetch_assoc($tblPackageVariant);
+?>
+   <!-- Benefits / Package Variants Section Start -->
+   <div class="sis-benefits-section sis-comman-background section pattern-bg-section">
+      <div class="container">
+         <div class="row justify-content-center align-items-center">
+            <div class="col-md-7">
+              <div class="sisf-sis-section-title text-center sis-section-title">
+                  <span class="sisf-m-subtitle white sis-text-anime-style-3"><?= $tblHomeExtraResult['variant_heading'] ?? '' ?></span>
+                  <h2 class="sisf-m-title sis-text-anime-style-3"><?= $packageVariant['heading1']; ?><br> <span class="sisf--e-colored"> <?= $packageVariant['heading2']; ?></span> </h2>
+                  <div class="sisf-m-text w-70" data-aos="fade-up" data-aos-delay="100">
+                    <?= $packageVariant['content']; ?>
+                  </div>
+               </div>
+            </div>
+         </div>   
+         <div class="row align-items-center">
+            <div class="col-lg-4">
+<?php
+$tblPackageVariantDetails = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 0, 5");
+if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
+    while($tblPackageVariantDetailsRow = mysqli_fetch_assoc($tblPackageVariantDetails)) {
+?>
+               <!-- Card 1 -->
+               <div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-right" data-aos-delay="100">
+                  <div class="sis-e-inner">
+                     <div class="d-flex gap-4 justify-content-end">
+                        <div class="sisf-m-contents">
+                           <div class="sis-e-title mb-1">
+                              <h3><?= $tblPackageVariantDetailsRow['packname'] ?></h3>
+                           </div>
+                           <div class="sis-e-text text-lg-end">
+                              <p class="mb-0"><?= $tblPackageVariantDetailsRow['pack_weight'] ?></p>
+                           </div>
+                        </div>
+                        <div class="sisf-m-icon">
+                           <figure>
+                              <img src="<?= SITE_URL ?>images/oilsize.png" class="img-fluid">
+                           </figure>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+<?php } } ?>
+            </div>
+
+            <div class="col-lg-4">
+               <div class="sis-benefit-image-center position-relative" data-aos="fade-up" data-aos-delay="500">
+                  <figure class="sis-reveal sis-radius">
+                     <img src="<?= SITE_URL ?>uploads/package_variant/<?= $packageVariant['image'] ?>" class="w-100" alt="Oilix"> 
+                  </figure>
+               </div>
+            </div>
+
+            <div class="col-lg-4 mt-4 mt-md-0">
+<?php
+$tblPackageVariantDetails1 = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 5, 5");
+if(mysqli_num_rows($tblPackageVariantDetails1) > 0) {
+    while($tblPackageVariantDetailsRow1 = mysqli_fetch_assoc($tblPackageVariantDetails1)) {
+?>               
+               <!-- Card 6 -->
+               <div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-left" data-aos-delay="350">
+                  <div class="sis-e-inner">
+                     <div class="d-flex gap-4">
+                        <div class="sisf-m-icon">
+                           <figure>
+                               <img src="<?= SITE_URL ?>images/oilsize.png" class="img-fluid">
+                           </figure>
+                        </div>
+                        <div class="sisf-m-contents">
+                           <div class="sis-e-title mb-1">
+                              <h3><?= $tblPackageVariantDetailsRow1['packname'] ?></h3>
+                           </div>
+                           <div class="sis-e-text">
+                              <p class="mb-0"><?= $tblPackageVariantDetailsRow1['pack_weight'] ?></p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+<?php } } ?>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Benefits / Package Variants Section End -->
+<?php } ?>
+
+<?php
 $tblHomeContact = mysqli_query($conn, "SELECT * FROM tbl_home_contact WHERE id='1' LIMIT 1");
 if(mysqli_num_rows($tblHomeContact) > 0) {
     $tblHomeContactData = mysqli_fetch_assoc($tblHomeContact);

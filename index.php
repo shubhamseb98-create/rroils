@@ -26,7 +26,7 @@ $tblHomeExtraResult = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tbl_
  $heroVideo = !empty($heroBanner['bnr_video']) ? 'uploads/banner/' . $heroBanner['bnr_video'] : '';
  ?>
  <!-- Hero Section Start -->
-  <!-- 555555555555555555555555555555 -->
+
          <div class="sis-hero hero-slider sis-video-page sisf--hero-video">
             <div class="hero-slider-layout position-relative">
                <div class="hero-swiper">
@@ -488,105 +488,54 @@ if(mysqli_num_rows($tblMillPhone) > 0) {
 
 
 <?php
-
-$tblPackageVariant = mysqli_query($conn, "SELECT * FROM tbl_package_variant LIMIT 1");
-if(mysqli_num_rows($tblPackageVariant) > 0) {
-    $packageVariant = mysqli_fetch_assoc($tblPackageVariant);
-
+$tblStartedHeaderQ = mysqli_query($conn, "SELECT * FROM `tbl_started_header` WHERE `id` = 1 LIMIT 1");
+$startedHeader = ($tblStartedHeaderQ && mysqli_num_rows($tblStartedHeaderQ) > 0) ? mysqli_fetch_assoc($tblStartedHeaderQ) : null;
+$startedTitle = !empty($startedHeader['title']) ? $startedHeader['title'] : 'How We Started';
+$startedSubtitle = !empty($startedHeader['subtitle']) ? nl2br(htmlspecialchars($startedHeader['subtitle'])) : 'From humble beginnings in 1970 to a global presence today,<br class="d-none d-md-block"> our journey is built on trust, quality and perseverance.';
 ?>
-       <!-- Benefits Section Start -->
-      <div class="sis-benefits-section sis-comman-background  section pattern-bg-section">
-         <div class="container">
-            <div class="row justify-content-center align-items-center">
-               <div class="col-md-7">
-                 <div class="sisf-sis-section-title text-center sis-section-title">
-                     <span class="sisf-m-subtitle white sis-text-anime-style-3"><?= $tblHomeExtraResult['variant_heading'] ?? '' ?></span>
-                     <h2 class="sisf-m-title sis-text-anime-style-3"><?= $packageVariant['heading1']; ?><br> <span class="sisf--e-colored">  <?= $packageVariant['heading2']; ?></span> </h2>
-                     <div class="sisf-m-text w-70" data-aos="fade-up" data-aos-delay="100">
-                       <?= $packageVariant['content']; ?>
+      <!-- Heritage Timeline Section Start -->
+      <section class="timeline-started-section section">
+         <div class="container-fluid px-2 px-md-4 px-xl-5">
+            <div class="row justify-content-center">
+               <div class="col-lg-8 text-center">
+                  <div class="sisf-sis-section-title sis-section-title mb-4" data-aos="fade-up" data-aos-delay="100">
+                     <span class="about-label-box">OUR HERITAGE & GROWTH</span>
+                     <h2 class="sisf-m-title sis-text-anime-style-3 mt-2"><?= htmlspecialchars($startedTitle) ?> <span class="sisf-e-colored">Journey</span></h2>
+                     <div class="sisf-m-text w-75 mx-auto mt-3">
+                        <p><?= $startedSubtitle ?></p>
                      </div>
                   </div>
                </div>
-            </div>   
-            <div class="row align-items-center">
-            <div class="col-lg-4">
+            </div>
+
+            <div class="clean-timeline-wrapper" data-aos="fade-up" data-aos-delay="200">
+               <div class="clean-timeline-track">
+                  <div class="clean-timeline-line"></div>
 <?php
-$tblPackageVariantDetails = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 0, 5");
-if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
-    while($tblPackageVariantDetailsRow = mysqli_fetch_assoc($tblPackageVariantDetails)) {
+$milestonesQ = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` WHERE `status` = '1' ORDER BY `sort` ASC, `id` ASC");
+if ($milestonesQ && mysqli_num_rows($milestonesQ) > 0) {
+    while ($item = mysqli_fetch_assoc($milestonesQ)) {
 ?>
-                <!-- Card 1 -->
-<div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-right" data-aos-delay="100">
-   <div class="sis-e-inner">
-      <div class="d-flex gap-4 justify-content-end">
-        
-         <div class="sisf-m-contents">
-            <div class="sis-e-title mb-1">
-               <h3><?= $tblPackageVariantDetailsRow['packname'] ?></h3>
-            </div>
-            <div class="sis-e-text text-lg-end">
-               <p class="mb-0"><?= $tblPackageVariantDetailsRow['pack_weight'] ?></p>
-            </div>
-         </div>
-          <div class="sisf-m-icon">
-            <figure>
-               <img src="<?= SITE_URL ?>images/oilsize.png" class="img-fluid">
-            </figure>
-         </div>
-      </div>
-   </div>
-</div>
-
-<?php } } ?>
-                 
-               </div>
-
-               <div class="col-lg-4">
-                  <div class="sis-benefit-image-center position-relative" data-aos="fade-up" data-aos-delay="500">
-                     <figure class="sis-reveal sis-radius">
-                        <img src="<?= SITE_URL ?>uploads/package_variant/<?= $packageVariant['image'] ?>" class="w-100" alt="Oilix"> 
-                     </figure>
-                   
+                  <div class="clean-milestone-item" style="--milestone-color: <?= htmlspecialchars($item['color']) ?>;">
+                     <div class="clean-milestone-badge" title="<?= htmlspecialchars($item['year']) ?>">
+                        <i class="<?= htmlspecialchars($item['icon']) ?>"></i>
+                     </div>
+                     <div class="clean-milestone-stem"></div>
+                     <div class="clean-milestone-node"></div>
+                     <div class="clean-milestone-content">
+                        <div class="clean-milestone-year"><?= htmlspecialchars($item['year']) ?></div>
+                        <p class="clean-milestone-desc"><?= htmlspecialchars($item['desc']) ?></p>
+                     </div>
                   </div>
-               </div>
-
-               <div class="col-lg-4 mt-4 mt-md-0">
-
-<?php
-$tblPackageVariantDetails1 = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 5, 5");
-if(mysqli_num_rows($tblPackageVariantDetails1) > 0) {
-    while($tblPackageVariantDetailsRow1 = mysqli_fetch_assoc($tblPackageVariantDetails1)) {
-?>               
-
-                 <!-- Card 6 -->
-<div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-left" data-aos-delay="350">
-   <div class="sis-e-inner">
-      <div class="d-flex gap-4">
-         <div class="sisf-m-icon">
-            <figure>
-                <img src="<?= SITE_URL ?>images/oilsize.png" class="img-fluid">
-            </figure>
-         </div>
-         <div class="sisf-m-contents">
-            <div class="sis-e-title mb-1">
-               <h3><?= $tblPackageVariantDetailsRow1['packname'] ?></h3>
-            </div>
-            <div class="sis-e-text">
-               <p class="mb-0"><?= $tblPackageVariantDetailsRow1['pack_weight'] ?></p>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-
-<?php } } ?>
-
+<?php 
+    }
+} 
+?>
                </div>
             </div>
          </div>
-      </div>
-      <!-- Benefits Section End -->
-<?php } ?>
+      </section>
+      <!-- Heritage Timeline Section End -->
 
      
       <?php
