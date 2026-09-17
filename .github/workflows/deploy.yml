@@ -1,0 +1,38 @@
+name: Deploy to Live Testing Server
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: # Allows manual one-click deployment from GitHub UI
+
+jobs:
+  web-deploy:
+    name: Sync files via FTP
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Checkout latest code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: 🚀 Sync files to testing server via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: ${{ secrets.FTP_PORT || 21 }}
+          protocol: ftp
+          # If your FTP account is locked to public_html/rroil, use './'.
+          # If using main cPanel account, set secret FTP_SERVER_DIR to 'public_html/rroil/'
+          server-dir: ${{ secrets.FTP_SERVER_DIR || './' }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/*.zip
+            **/*.sql
+            **/error_log
+            **/.DS_Store
+            **/Thumbs.db

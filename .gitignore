@@ -1,0 +1,29 @@
+# Archives and large backups (GitHub 100MB file limit)
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+
+# Server and PHP error logs
+error_log
+*/error_log
+*.log
+
+# Session runtime cache (keep directory structure with .gitkeep)
+sessions/*
+!sessions/.gitkeep
+
+# SQL database dumps (prevent accidental credential/data exposure)
+*.sql
+
+# OS generated files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE and Editor configurations
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

@@ -1,0 +1,27 @@
+RewriteEngine On
+
+# ----------------------------------
+# Error Pages
+# ----------------------------------
+ErrorDocument 404 /404
+ErrorDocument 403 /404
+
+# ----------------------------------
+# Force HTTPS
+# ----------------------------------
+#RewriteCond %{HTTPS} !=on
+#RewriteRule ^ https://rroils.com%{REQUEST_URI} [L,R=301]
+
+# ----------------------------------
+# Force Non-WWW
+# ----------------------------------
+#RewriteCond %{HTTP_HOST} ^www\.rroils\.com$ [NC]
+#RewriteRule ^(.*)$ https://rroils.com/$1 [L,R=301]
+
+
+# ----------------------------------
+# Load PHP Files Without Extension
+# ----------------------------------
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.+?)/?$ $1.php [L]
