@@ -12,6 +12,7 @@ $mRecord = mysqli_fetch_assoc($checkM);
 
 if (isset($_POST['submit'])) {
     $year = mysqli_real_escape_string($conn, trim($_POST['year']));
+    $title = mysqli_real_escape_string($conn, trim($_POST['title'] ?? ''));
     $color = mysqli_real_escape_string($conn, trim($_POST['color']));
     $icon = mysqli_real_escape_string($conn, trim($_POST['icon']));
     $desc = mysqli_real_escape_string($conn, trim($_POST['desc']));
@@ -23,6 +24,7 @@ if (isset($_POST['submit'])) {
 
     $updateQ = mysqli_query($conn, "UPDATE `tbl_started_milestones` SET 
         `year` = '$year',
+        `title` = '$title',
         `color` = '$color',
         `icon` = '$icon',
         `desc` = '$desc',
@@ -81,6 +83,13 @@ if (isset($_POST['submit'])) {
 									<label class="col-md-3 col-form-label font-weight-bold">Year / Label <span class="text-danger">*</span></label>
 									<div class="col-md-9">
 										<input type="text" name="year" class="form-control" value="<?= htmlspecialchars($mRecord['year']); ?>" required />
+									</div>
+								</div>
+
+								<div class="form-group row m-b-15">
+									<label class="col-md-3 col-form-label font-weight-bold">Title / Heading</label>
+									<div class="col-md-9">
+										<input type="text" name="title" class="form-control" value="<?= htmlspecialchars($mRecord['title'] ?? ''); ?>" placeholder="e.g. Foundation, Regional Expansion" />
 									</div>
 								</div>
 

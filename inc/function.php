@@ -72,9 +72,9 @@ if (!$headerTableCheck || mysqli_num_rows($headerTableCheck) == 0) {
         `status` tinyint(1) NOT NULL DEFAULT 1,
         PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
-    $defaultSub = "From our founding roots in 1970 to India's trusted edible oil manufacturer today,\\r\\nour journey is built on purity, tradition, and uncompromising quality.";
+    $defaultSub = "From our founding roots in 2003 to India's trusted edible oil manufacturer today,\r\nour journey is built on purity, tradition, and uncompromising quality.";
     mysqli_query($conn, "INSERT INTO `tbl_started_header` (`id`, `title`, `subtitle`, `status`) VALUES
-        (1, 'How We Started', '$defaultSub', 1)");
+        (1, 'How We Started', '" . mysqli_real_escape_string($conn, $defaultSub) . "', 1)");
 }
 
 // Auto-create tbl_started_milestones if not exists
@@ -83,6 +83,7 @@ if (!$milestoneTableCheck || mysqli_num_rows($milestoneTableCheck) == 0) {
     mysqli_query($conn, "CREATE TABLE IF NOT EXISTS `tbl_started_milestones` (
         `id` int(11) NOT NULL AUTO_INCREMENT,
         `year` varchar(50) NOT NULL,
+        `title` varchar(255) NOT NULL DEFAULT '',
         `color` varchar(50) NOT NULL DEFAULT '#133827',
         `icon` varchar(100) NOT NULL DEFAULT 'fa-solid fa-industry',
         `desc` text NOT NULL,
@@ -90,41 +91,50 @@ if (!$milestoneTableCheck || mysqli_num_rows($milestoneTableCheck) == 0) {
         `status` tinyint(1) NOT NULL DEFAULT 1,
         PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+} else {
+    // Ensure title column exists
+    $titleColCheck = mysqli_query($conn, "SHOW COLUMNS FROM `tbl_started_milestones` LIKE 'title'");
+    if (!$titleColCheck || mysqli_num_rows($titleColCheck) == 0) {
+        mysqli_query($conn, "ALTER TABLE `tbl_started_milestones` ADD COLUMN `title` VARCHAR(255) NOT NULL DEFAULT '' AFTER `year`");
+    }
 }
 
-// Check if milestones need migration to Oil Mill data (if empty or contains old dal mill seed data)
-$checkOldSeed = mysqli_query($conn, "SELECT id FROM `tbl_started_milestones` WHERE `desc` LIKE '%pulses%' OR `desc` LIKE '%Dal Mill%' OR `desc` LIKE '%AgroPure%' LIMIT 1");
+// Check if milestones need migration to 2003+ Oil Mill data (if empty or contains old 1970 / dal mill seed data)
+$checkOldSeed = mysqli_query($conn, "SELECT id FROM `tbl_started_milestones` WHERE `year` = '1970' OR `desc` LIKE '%pulses%' OR `desc` LIKE '%Dal Mill%' OR `desc` LIKE '%AgroPure%' LIMIT 1");
 $countMilestones = mysqli_fetch_row(mysqli_query($conn, "SELECT COUNT(*) FROM `tbl_started_milestones`"))[0] ?? 0;
 
 if ($countMilestones == 0 || ($checkOldSeed && mysqli_num_rows($checkOldSeed) > 0)) {
     mysqli_query($conn, "TRUNCATE TABLE `tbl_started_milestones`");
 
     $oilMilestones = [
-        ['1970', '#133827', 'fa-solid fa-seedling', 'Foundations laid by Late Shri Ramniwas Ji Agarwal with a vision for pure edible oils', 1],
-        ['1985', '#2e7d32', 'fa-solid fa-industry', 'First traditional cold-press (Kachi Ghani) oil extraction mill established in Rajasthan', 2],
-        ['1998', '#558b2f', 'fa-solid fa-tractor', "Built direct procurement network across Rajasthan's finest mustard farming belts", 3],
-        ['2005', '#8d6e3f', 'fa-solid fa-filter', 'Introduced multi-stage double filtration system to preserve natural pungency & aroma', 4],
-        ['2010', '#c67c00', 'fa-solid fa-bottle-droplet', 'Launched consumer retail packs in pouches and premium PET bottles', 5],
-        ['2015', '#d85a00', 'fa-solid fa-boxes-packing', 'Commissioned automated multi-format tin, bottle, and jar packaging lines', 6],
-        ['2018', '#b71c1c', 'fa-solid fa-award', 'Accredited with Agmark Grade-1 & FSSAI food safety quality certifications', 7],
-        ['2020', '#133827', 'fa-solid fa-building', 'Set up modern manufacturing facility at Agro Food Park, MIA Alwar, Rajasthan', 8],
-        ['2021', '#2e6b34', 'fa-solid fa-users-gear', 'Next-gen corporate leadership joined to drive modern manufacturing & digital systems', 9],
-        ['2022', '#a06535', 'fa-solid fa-flask-vial', 'Commissioned in-house high-tech laboratory for zero-adulteration quality assurance', 10],
-        ['2023', '#e65100', 'fa-solid fa-handshake', 'Expanded B2B private labelling & co-packing services for premier national brands', 11],
-        ['2024+', '#133827', 'fa-solid fa-chart-line', 'Rapidly expanding crushing capacity with a trusted pan-India distribution network', 12]
+        ['2003', 'Foundation', '#133827', 'fa-solid fa-seedling', 'Laid the foundation for our Cotton Ginning & Cotton Seed Processing business.', 1],
+        ['2005', 'Regional Expansion', '#2e7d32', 'fa-solid fa-map-location-dot', 'Expanded operations and strengthened our presence across Northern & Western India.', 2],
+        ['2009', 'Diversification', '#558b2f', 'fa-solid fa-oil-well', 'Expanded into Kachi Ghani Mustard Oil (KGMO) manufacturing along with Mustard Cake production.', 3],
+        ['2013', 'Brand Launch', '#c67c00', 'fa-solid fa-sun', 'Launched Mustard Cake under the “Sunstar” brand, marking our entry into branded products.', 4],
+        ['2014', 'Consumer Retail', '#d85a00', 'fa-solid fa-bottle-droplet', 'Introduced Sunstar consumer retail packs in PET bottles, strengthening our presence in the retail market.', 5],
+        ['2015', 'Food Safety & Quality', '#b71c1c', 'fa-solid fa-award', 'Achieved FSSAI food safety and quality certifications, reinforcing our commitment to quality and compliance.', 6],
+        ['2017', 'Automated Packaging', '#e65100', 'fa-solid fa-boxes-packing', 'Commissioned automated multi-format packaging lines for tins, bottles, pouches and jars.', 7],
+        ['2017', 'Private Labelling Venture', '#8d6e3f', 'fa-solid fa-tags', 'Started a dedicated KGMO private-labeling business, expanding our B2B capabilities.', 8],
+        ['2019', 'B2B & Co-Packing Expansion', '#1b5e20', 'fa-solid fa-handshake', 'Expanded our B2B private-label and co-packing services with leading national brands.', 9],
+        ['2020', 'Quality Assurance', '#00695c', 'fa-solid fa-flask-vial', 'Commissioned an in-house high-tech laboratory to strengthen quality control and ensure stringent zero-adulteration standards.', 10],
+        ['2021', 'New Manufacturing Facility', '#133827', 'fa-solid fa-industry', 'Established a modern manufacturing facility at Agro Food Park, MIA, Alwar, Rajasthan, further enhancing our production capabilities.', 11],
+        ['2022', 'Next-Generation Leadership', '#2e6b34', 'fa-solid fa-users-gear', 'The next generation of corporate leadership joined the business, driving modern manufacturing practices, digital systems and future growth.', 12],
+        ['2024', 'Strategic B2B Expansion', '#ef6c00', 'fa-solid fa-briefcase', 'Expanded our B2B private-labeling business by onboarding new partners at our Alwar facility.', 13],
+        ['2025+', 'Accelerating Growth', '#133827', 'fa-solid fa-chart-line', 'Rapidly expanding crushing capacity with the development of a third manufacturing unit in Alwar, supported by a trusted pan-India distribution network.', 14]
     ];
 
     foreach ($oilMilestones as $m) {
         $y = mysqli_real_escape_string($conn, $m[0]);
-        $c = mysqli_real_escape_string($conn, $m[1]);
-        $ic = mysqli_real_escape_string($conn, $m[2]);
-        $d = mysqli_real_escape_string($conn, $m[3]);
-        $s = (int)$m[4];
-        mysqli_query($conn, "INSERT INTO `tbl_started_milestones` (`year`, `color`, `icon`, `desc`, `sort`, `status`) VALUES ('$y', '$c', '$ic', '$d', $s, 1)");
+        $t = mysqli_real_escape_string($conn, $m[1]);
+        $c = mysqli_real_escape_string($conn, $m[2]);
+        $ic = mysqli_real_escape_string($conn, $m[3]);
+        $d = mysqli_real_escape_string($conn, $m[4]);
+        $s = (int)$m[5];
+        mysqli_query($conn, "INSERT INTO `tbl_started_milestones` (`year`, `title`, `color`, `icon`, `desc`, `sort`, `status`) VALUES ('$y', '$t', '$c', '$ic', '$d', $s, 1)");
     }
 
-    // Update Header subtitle to oil mill text
-    $newSub = "From our founding roots in 1970 to India's trusted edible oil manufacturer today,\r\nour journey is built on purity, tradition, and uncompromising quality.";
+    // Update Header subtitle to oil mill text starting in 2003
+    $newSub = "From our founding roots in 2003 to India's trusted edible oil manufacturer today,\r\nour journey is built on purity, tradition, and uncompromising quality.";
     mysqli_query($conn, "UPDATE `tbl_started_header` SET `title` = 'How We Started', `subtitle` = '" . mysqli_real_escape_string($conn, $newSub) . "' WHERE `id` = 1");
 }
 

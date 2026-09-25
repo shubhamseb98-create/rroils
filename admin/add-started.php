@@ -4,6 +4,7 @@ include '../inc/function.php';
 
 if (isset($_POST['submit'])) {
     $year = mysqli_real_escape_string($conn, trim($_POST['year']));
+    $title = mysqli_real_escape_string($conn, trim($_POST['title'] ?? ''));
     $color = mysqli_real_escape_string($conn, trim($_POST['color']));
     $icon = mysqli_real_escape_string($conn, trim($_POST['icon']));
     $desc = mysqli_real_escape_string($conn, trim($_POST['desc']));
@@ -13,7 +14,7 @@ if (isset($_POST['submit'])) {
     if (empty($color)) $color = '#2e7d32';
     if (empty($icon)) $icon = 'fa-solid fa-industry';
 
-    $query = mysqli_query($conn, "INSERT INTO `tbl_started_milestones` (`year`, `color`, `icon`, `desc`, `sort`, `status`) VALUES ('$year', '$color', '$icon', '$desc', '$sort', '$status')");
+    $query = mysqli_query($conn, "INSERT INTO `tbl_started_milestones` (`year`, `title`, `color`, `icon`, `desc`, `sort`, `status`) VALUES ('$year', '$title', '$color', '$icon', '$desc', '$sort', '$status')");
     if ($query) {
         $_SESSION['success'] = "Milestone added successfully";
         header("location:manage-started.php");
@@ -64,7 +65,14 @@ if (isset($_POST['submit'])) {
 								<div class="form-group row m-b-15">
 									<label class="col-md-3 col-form-label font-weight-bold">Year / Label <span class="text-danger">*</span></label>
 									<div class="col-md-9">
-										<input type="text" name="year" class="form-control" placeholder="e.g. 1970 or 2024+" required />
+										<input type="text" name="year" class="form-control" placeholder="e.g. 2003 or 2025+" required />
+									</div>
+								</div>
+
+								<div class="form-group row m-b-15">
+									<label class="col-md-3 col-form-label font-weight-bold">Title / Heading</label>
+									<div class="col-md-9">
+										<input type="text" name="title" class="form-control" placeholder="e.g. Foundation, Regional Expansion" />
 									</div>
 								</div>
 

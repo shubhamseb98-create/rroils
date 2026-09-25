@@ -491,7 +491,16 @@ if(mysqli_num_rows($tblMillPhone) > 0) {
 $tblStartedHeaderQ = mysqli_query($conn, "SELECT * FROM `tbl_started_header` WHERE `id` = 1 LIMIT 1");
 $startedHeader = ($tblStartedHeaderQ && mysqli_num_rows($tblStartedHeaderQ) > 0) ? mysqli_fetch_assoc($tblStartedHeaderQ) : null;
 $startedTitle = !empty($startedHeader['title']) ? $startedHeader['title'] : 'How We Started';
-$startedSubtitle = !empty($startedHeader['subtitle']) ? nl2br(htmlspecialchars($startedHeader['subtitle'])) : 'From humble beginnings in 1970 to a global presence today,<br class="d-none d-md-block"> our journey is built on trust, quality and perseverance.';
+$startedSubtitle = !empty($startedHeader['subtitle']) ? nl2br(htmlspecialchars($startedHeader['subtitle'])) : 'From our founding roots in 2003 to India\'s trusted edible oil manufacturer today,<br class="d-none d-md-block"> our journey is built on purity, tradition, and uncompromising quality.';
+
+$milestonesQ = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` WHERE `status` = '1' ORDER BY `sort` ASC, `id` ASC");
+$milestonesList = [];
+if ($milestonesQ && mysqli_num_rows($milestonesQ) > 0) {
+    while ($mRow = mysqli_fetch_assoc($milestonesQ)) {
+        $milestonesList[] = $mRow;
+    }
+}
+$milestoneCount = count($milestonesList);
 ?>
       <!-- Heritage Timeline Section Start -->
       <section class="timeline-started-section section">
@@ -508,34 +517,126 @@ $startedSubtitle = !empty($startedHeader['subtitle']) ? nl2br(htmlspecialchars($
                </div>
             </div>
 
-            <div class="clean-timeline-wrapper" data-aos="fade-up" data-aos-delay="200">
-               <div class="clean-timeline-track">
-                  <div class="clean-timeline-line"></div>
-<?php
-$milestonesQ = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` WHERE `status` = '1' ORDER BY `sort` ASC, `id` ASC");
-if ($milestonesQ && mysqli_num_rows($milestonesQ) > 0) {
-    while ($item = mysqli_fetch_assoc($milestonesQ)) {
-?>
-                  <div class="clean-milestone-item" style="--milestone-color: <?= htmlspecialchars($item['color']) ?>;">
-                     <div class="clean-milestone-badge" title="<?= htmlspecialchars($item['year']) ?>">
-                        <i class="<?= htmlspecialchars($item['icon']) ?>"></i>
+            <div class="clean-timeline-outer" data-aos="fade-up" data-aos-delay="200">
+               <!-- Left & Right Nav Buttons -->
+               <button type="button" class="timeline-scroll-btn timeline-btn-prev" id="timelineBtnPrev" aria-label="Previous Milestones">
+                  <i class="fa-solid fa-chevron-left"></i>
+               </button>
+               <button type="button" class="timeline-scroll-btn timeline-btn-next" id="timelineBtnNext" aria-label="Next Milestones">
+                  <i class="fa-solid fa-chevron-right"></i>
+               </button>
+
+               <div class="clean-timeline-wrapper" id="cleanTimelineWrapper">
+                  <div class="clean-timeline-track" style="--milestone-total: <?= $milestoneCount > 0 ? $milestoneCount : 14; ?>;">
+                     <div class="clean-timeline-line"></div>
+<?php foreach ($milestonesList as $item) { ?>
+                     <div class="clean-milestone-item" style="--milestone-color: <?= htmlspecialchars($item['color']) ?>;">
+                        <div class="clean-milestone-badge" title="<?= htmlspecialchars($item['year']) . (!empty($item['title']) ? ' - ' . htmlspecialchars($item['title']) : '') ?>">
+                           <i class="<?= htmlspecialchars($item['icon']) ?>"></i>
+                        </div>
+                        <div class="clean-milestone-stem"></div>
+                        <div class="clean-milestone-node"></div>
+                        <div class="clean-milestone-content">
+                           <div class="clean-milestone-year"><?= htmlspecialchars($item['year']) ?></div>
+                           <?php if (!empty($item['title'])) { ?>
+                              <div class="clean-milestone-title"><?= htmlspecialchars($item['title']) ?></div>
+                           <?php } ?>
+                           <p class="clean-milestone-desc"><?= htmlspecialchars($item['desc']) ?></p>
+                        </div>
                      </div>
-                     <div class="clean-milestone-stem"></div>
-                     <div class="clean-milestone-node"></div>
-                     <div class="clean-milestone-content">
-                        <div class="clean-milestone-year"><?= htmlspecialchars($item['year']) ?></div>
-                        <p class="clean-milestone-desc"><?= htmlspecialchars($item['desc']) ?></p>
-                     </div>
+<?php } ?>
                   </div>
-<?php 
-    }
-} 
-?>
                </div>
             </div>
          </div>
       </section>
       <!-- Heritage Timeline Section End -->
+
+      <script>
+         (function () {
+            'use strict';
+            const wrapper = document.getElementById('cleanTimelineWrapper');
+            const prevBtn = document.getElementById('timelineBtnPrev');
+            const nextBtn = document.getElementById('timelineBtnNext');
+            if (!wrapper) return;
+
+            const scrollStep = 420;
+
+            if (prevBtn) {
+               prevBtn.addEventListener('click', function () {
+                  wrapper.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+               });
+            }
+
+            if (nextBtn) {
+               nextBtn.addEventListener('click', function () {
+                  wrapper.scrollBy({ left: scrollStep, behavior: 'smooth' });
+               });
+            }
+
+            function updateBtnState() {
+               if (!prevBtn || !nextBtn) return;
+               const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+               prevBtn.classList.toggle('is-disabled', wrapper.scrollLeft <= 10);
+               nextBtn.classList.toggle('is-disabled', wrapper.scrollLeft >= maxScroll - 10);
+            }
+
+            wrapper.addEventListener('scroll', updateBtnState);
+            window.addEventListener('resize', updateBtnState);
+            setTimeout(updateBtnState, 200);
+
+            // Drag-to-scroll
+            let isDown = false;
+            let startX = 0;
+            let scrollStart = 0;
+
+            wrapper.addEventListener('mousedown', function (e) {
+               isDown = true;
+               wrapper.classList.add('is-dragging');
+               startX = e.pageX - wrapper.offsetLeft;
+               scrollStart = wrapper.scrollLeft;
+            });
+
+            window.addEventListener('mouseup', function () {
+               if (isDown) {
+                  isDown = false;
+                  wrapper.classList.remove('is-dragging');
+               }
+            });
+
+            wrapper.addEventListener('mousemove', function (e) {
+               if (!isDown) return;
+               e.preventDefault();
+               const x = e.pageX - wrapper.offsetLeft;
+               const walk = (x - startX) * 1.5;
+               wrapper.scrollLeft = scrollStart - walk;
+            });
+
+            // Auto-align line coordinates to nodes
+            function alignTimelineLine() {
+               const track = wrapper.querySelector('.clean-timeline-track');
+               const line = wrapper.querySelector('.clean-timeline-line');
+               const nodes = wrapper.querySelectorAll('.clean-milestone-node');
+               if (track && line && nodes.length >= 2) {
+                  const firstNode = nodes[0];
+                  const lastNode = nodes[nodes.length - 1];
+                  const trackRect = track.getBoundingClientRect();
+                  const firstRect = firstNode.getBoundingClientRect();
+                  const lastRect = lastNode.getBoundingClientRect();
+
+                  const left = (firstRect.left - trackRect.left) + (firstRect.width / 2);
+                  const right = (trackRect.right - lastRect.right) + (lastRect.width / 2);
+
+                  line.style.left = left + 'px';
+                  line.style.right = right + 'px';
+               }
+            }
+
+            window.addEventListener('load', alignTimelineLine);
+            window.addEventListener('resize', alignTimelineLine);
+            setTimeout(alignTimelineLine, 350);
+         })();
+      </script>
 
      
       <?php

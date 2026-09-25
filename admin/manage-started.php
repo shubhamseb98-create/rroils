@@ -59,7 +59,7 @@ if (isset($_POST['Delete']) && isset($_POST['bb'])) {
 $headerDataQ = mysqli_query($conn, "SELECT * FROM `tbl_started_header` WHERE `id` = 1");
 $headerData = ($headerDataQ && mysqli_num_rows($headerDataQ) > 0) ? mysqli_fetch_assoc($headerDataQ) : null;
 $currentTitle = $headerData['title'] ?? 'How We Started';
-$currentSubtitle = $headerData['subtitle'] ?? "From humble beginnings in 1970 to a global presence today,\r\nour journey is built on trust, quality and perseverance.";
+$currentSubtitle = $headerData['subtitle'] ?? "From our founding roots in 2003 to India's trusted edible oil manufacturer today,\r\nour journey is built on purity, tradition, and uncompromising quality.";
 
 $milestonesFetch = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` ORDER BY `sort` ASC, `id` ASC");
 ?>
@@ -173,7 +173,7 @@ $milestonesFetch = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` O
 										<thead>
 											<tr>
 												<th width="1%">#</th>
-												<th width="8%">Year</th>
+												<th width="12%">Year & Title</th>
 												<th width="8%">Color</th>
 												<th width="8%">Icon</th>
 												<th>Description</th>
@@ -193,8 +193,11 @@ $milestonesFetch = mysqli_query($conn, "SELECT * FROM `tbl_started_milestones` O
 											?>
 												<tr>
 													<td class="f-s-600 text-inverse"><?= $count; ?></td>
-													<td style="font-weight:700; color:<?= htmlspecialchars($m['color']); ?>; font-size:16px;">
+													<td style="font-weight:700; color:<?= htmlspecialchars($m['color']); ?>; font-size:15px;">
 														<?= htmlspecialchars($m['year']); ?>
+														<?php if (!empty($m['title'])) { ?>
+															<div style="font-size:12px; font-weight:600; color:#333; line-height:1.2; margin-top:3px;"><?= htmlspecialchars($m['title']); ?></div>
+														<?php } ?>
 													</td>
 													<td>
 														<span style="display:inline-block; width:18px; height:18px; border-radius:50%; background:<?= htmlspecialchars($m['color']); ?>; vertical-align:middle; margin-right:5px; border:1px solid #ccc;"></span>
