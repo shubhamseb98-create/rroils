@@ -103,7 +103,7 @@ if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
     while($tblPackageVariantDetailsRow = mysqli_fetch_assoc($tblPackageVariantDetails)) {
 ?>
                <!-- Card 1 -->
-               <div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-right" data-aos-delay="100">
+               <div class="sisf-e-page-hover-contents pb-1 mb-2" data-aos="fade-right" data-aos-delay="100">
                   <div class="sis-e-inner">
                      <div class="d-flex gap-4 justify-content-end">
                         <div class="sisf-m-contents">
@@ -140,7 +140,7 @@ if(mysqli_num_rows($tblPackageVariantDetails1) > 0) {
     while($tblPackageVariantDetailsRow1 = mysqli_fetch_assoc($tblPackageVariantDetails1)) {
 ?>               
                <!-- Card 6 -->
-               <div class="sisf-e-page-hover-contents sisf-sis-bottom-border pb-1 mb-2" data-aos="fade-left" data-aos-delay="350">
+               <div class="sisf-e-page-hover-contents pb-1 mb-2" data-aos="fade-left" data-aos-delay="350">
                   <div class="sis-e-inner">
                      <div class="d-flex gap-4">
                         <div class="sisf-m-icon">

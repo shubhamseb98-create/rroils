@@ -1913,6 +1913,10 @@
 		border-right: 1px solid rgba(0, 0, 0, 0.1);
 	}
 
+	.sis-benefits-section .sisf-e-page-hover-contents {
+		border-bottom: none !important;
+	}
+
 	.sisf-sustainable-icon-image img {
 		min-width: 50px;
 	}
