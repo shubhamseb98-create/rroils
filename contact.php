@@ -192,29 +192,6 @@ if(mysqli_num_rows($tblHomeContact) > 0) {
 
                               <div class="col-12">
                                  <div class="form-group mb-0">
-                                    <label class="form-label fw-bold text-dark mb-2 d-block" style="font-size: 0.9rem;">Category of Interest *</label>
-                                    <div class="d-flex flex-wrap gap-2">
-                                       <input type="radio" class="btn-check" name="category" id="cat1" value="Hygiene" autocomplete="off" checked>
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat1" style="font-size: 0.85rem; border-color: #eee; color:#fcb700;">Hygiene</label>
-                                        
-                                        <input type="radio" class="btn-check" name="category" id="cat2" value="Home Care" autocomplete="off">
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat2" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Home Care</label>
-                                        
-                                        <input type="radio" class="btn-check" name="category" id="cat3" value="Healthcare" autocomplete="off">
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat3" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Healthcare</label>
-                                    </div>
-                                    <style>
-                                       .btn-check:checked + .btn-outline-warning {
-                                          background-color: var(--main-color);
-                                          border-color: var(--main-color);
-                                          color: white;
-                                       }
-                                    </style>
-                                 </div>
-                              </div>
-
-                              <div class="col-12">
-                                 <div class="form-group mb-0">
                                     <label class="form-label fw-bold text-dark mb-1" style="font-size: 0.9rem;">Your Message</label>
                                     <textarea class="form-control bg-white border rounded-3 px-3 py-2" name="message" placeholder="Tell us about your requirements..." rows="4" style="border-color: #dee2e6 !important;"></textarea>
                                  </div>

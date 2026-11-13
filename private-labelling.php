@@ -41,81 +41,6 @@ $tblBread = mysqli_fetch_assoc(mysqli_query($conn,"SELECT metadesc,brd_name,brd_
    </div>
    <!-- ===== Page Banner End ===== -->
 
-   <!-- ===== Intro Section ===== -->
-<?php 
-$tblPrivateLabelService = mysqli_query($conn, "SELECT * FROM tbl_label_service");
-if(mysqli_num_rows($tblPrivateLabelService) > 0){
-   $privateLabel = mysqli_fetch_assoc($tblPrivateLabelService);
-?>
-   <!-- ===== Intro Section ===== -->
-   <section class="pl-intro-section py-5">
-      <div class="container mt-4">
-         <div class="row justify-content-center">
-            <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
-               <div class="sisf-sis-section-title sis-section-title mb-4">
-                  <span class="about-label-box"><?= $privateLabel['subheading']; ?></span>
-                  <h2 class="sisf-m-title sis-text-anime-style-3"><?= $privateLabel['heading1']; ?> <span class="sisf-e-colored"><?= $privateLabel['heading2']; ?></span></h2>
-               </div>
-               <?= $privateLabel['content']; ?>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- ===== Intro Section End ===== -->
-<?php } ?>
-   <!-- ===== Intro Section End ===== -->
-
-<?php 
-$tblManyService = mysqli_query($conn, "SELECT * FROM tbl_many_service WHERE `status` = '1' ORDER BY `sort`");
-if(mysqli_num_rows($tblManyService) > 0){
-?>   
-   <!-- ===== Steps Section ===== -->
-   <section class="pl-steps-section">
-      <div class="container">
-         <div class="row justify-content-center">
-            <div class="col-lg-11">
-<?php
-$i=1;$j=1;
-while($rowManyServices = mysqli_fetch_assoc($tblManyService)){
-?>
-<?php
-if( $i % 2 != 0){
-?>
-               <!-- Step 1 -->
-               <div class="pl-step-item" data-aos="fade-up" data-aos-delay="100">
-                  <div class="pl-step-thumb">
-                     <img src="<?= SITE_URL ?>uploads/many_services/<?= $rowManyServices['image'] ?>" alt="Step 1 - Let us know what you need">
-                  </div>
-                  <div class="pl-step-content">
-                     <div class="pl-step-header">
-                        <div class="pl-step-number"><?= $j ?></div>
-                        <h4><?= $rowManyServices['title'] ?></h4>
-                     </div>
-                     <?= $rowManyServices['content'] ?>
-                  </div>
-               </div>
-<?php } else { ?>
-               <!-- Step 2 -->
-               <div class="pl-step-item reverse" data-aos="fade-up" data-aos-delay="150">
-                  <div class="pl-step-thumb">
-                     <img src="<?= SITE_URL ?>uploads/many_services/<?= $rowManyServices['image'] ?>" alt="Step 2 - Send us your artwork and label design">
-                  </div>
-                  <div class="pl-step-content">
-                     <div class="pl-step-header">
-                        <div class="pl-step-number"><?= $j ?></div>
-                        <h4><?= $rowManyServices['title'] ?></h4>
-                     </div>
-                     <?= $rowManyServices['content'] ?>
-                  </div>
-               </div>
-               <?php } ?>
-<?php $i++; $j++; } ?>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- ===== Steps Section End ===== -->
-<?php } ?>    
 <?php
 $textforYou = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tbl_labeltext"));
 ?>
@@ -240,6 +165,82 @@ if(mysqli_num_rows($tblPackageVariantDetails1) > 0) {
       </div>
    </div>
    <!-- Benefits / Package Variants Section End -->
+<?php } ?>
+
+<!-- ===== Intro Section ===== -->
+<?php 
+$tblPrivateLabelService = mysqli_query($conn, "SELECT * FROM tbl_label_service");
+if(mysqli_num_rows($tblPrivateLabelService) > 0){
+   $privateLabel = mysqli_fetch_assoc($tblPrivateLabelService);
+?>
+   <!-- ===== Intro Section ===== -->
+   <section class="pl-intro-section py-5">
+      <div class="container mt-4">
+         <div class="row justify-content-center">
+            <div class="col-lg-10 text-center" data-aos="fade-up" data-aos-delay="100">
+               <div class="sisf-sis-section-title sis-section-title mb-4">
+                  <span class="about-label-box"><?= $privateLabel['subheading']; ?></span>
+                  <h2 class="sisf-m-title sis-text-anime-style-3"><?= $privateLabel['heading1']; ?> <span class="sisf-e-colored"><?= $privateLabel['heading2']; ?></span></h2>
+               </div>
+               <?= $privateLabel['content']; ?>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- ===== Intro Section End ===== -->
+<?php } ?>
+   <!-- ===== Intro Section End ===== -->
+
+<?php 
+$tblManyService = mysqli_query($conn, "SELECT * FROM tbl_many_service WHERE `status` = '1' ORDER BY `sort`");
+if(mysqli_num_rows($tblManyService) > 0){
+?>   
+   <!-- ===== Steps Section ===== -->
+   <section class="pl-steps-section">
+      <div class="container">
+         <div class="row justify-content-center">
+            <div class="col-lg-11">
+<?php
+$i=1;$j=1;
+while($rowManyServices = mysqli_fetch_assoc($tblManyService)){
+?>
+<?php
+if( $i % 2 != 0){
+?>
+               <!-- Step 1 -->
+               <div class="pl-step-item" data-aos="fade-up" data-aos-delay="100">
+                  <div class="pl-step-thumb">
+                     <img src="<?= SITE_URL ?>uploads/many_services/<?= $rowManyServices['image'] ?>" alt="Step 1 - Let us know what you need">
+                  </div>
+                  <div class="pl-step-content">
+                     <div class="pl-step-header">
+                        <div class="pl-step-number"><?= $j ?></div>
+                        <h4><?= $rowManyServices['title'] ?></h4>
+                     </div>
+                     <?= $rowManyServices['content'] ?>
+                  </div>
+               </div>
+<?php } else { ?>
+               <!-- Step 2 -->
+               <div class="pl-step-item reverse" data-aos="fade-up" data-aos-delay="150">
+                  <div class="pl-step-thumb">
+                     <img src="<?= SITE_URL ?>uploads/many_services/<?= $rowManyServices['image'] ?>" alt="Step 2 - Send us your artwork and label design">
+                  </div>
+                  <div class="pl-step-content">
+                     <div class="pl-step-header">
+                        <div class="pl-step-number"><?= $j ?></div>
+                        <h4><?= $rowManyServices['title'] ?></h4>
+                     </div>
+                     <?= $rowManyServices['content'] ?>
+                  </div>
+               </div>
+               <?php } ?>
+<?php $i++; $j++; } ?>
+            </div>
+         </div>
+      </div>
+   </section>
+   <!-- ===== Steps Section End ===== -->
 <?php } ?>
 
 <?php
@@ -393,29 +394,6 @@ if(mysqli_num_rows($tblHomeContact) > 0) {
                                  <div class="form-group mb-0">
                                     <label class="form-label fw-bold text-dark mb-1" style="font-size: 0.9rem;">Monthly Quantity Requirement</label>
                                     <input type="text" class="form-control bg-white border rounded-3 px-3 py-2" id="quantity" name="quantity" placeholder="e.g. 10,000 units/month" style="border-color: #dee2e6 !important;">
-                                 </div>
-                              </div>
-
-                              <div class="col-12">
-                                 <div class="form-group mb-0">
-                                    <label class="form-label fw-bold text-dark mb-2 d-block" style="font-size: 0.9rem;">Category of Interest *</label>
-                                    <div class="d-flex flex-wrap gap-2">
-                                       <input type="radio" class="btn-check" name="category" id="cat1" autocomplete="off" checked>
-                                       <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat1" style="font-size: 0.85rem; border-color: #eee; color:#fcb700;">Hygiene</label>
-                                       
-                                       <input type="radio" class="btn-check" name="category" id="cat2" autocomplete="off">
-                                       <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat2" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Home Care</label>
-                                       
-                                       <input type="radio" class="btn-check" name="category" id="cat3" autocomplete="off">
-                                       <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat3" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Healthcare</label>
-                                    </div>
-                                    <style>
-                                       .btn-check:checked + .btn-outline-warning {
-                                          background-color: var(--main-color);
-                                          border-color: var(--main-color);
-                                          color: white;
-                                       }
-                                    </style>
                                  </div>
                               </div>
 

@@ -14,7 +14,7 @@
       <div class="sisf-page-background sis-main-banner">
            <!-- Header New Start -->
          <header id="sisf-page-header" class="sisf-main-header sisf-standerd-header position-relative">
-            <div class="sis-header-top">
+            <div class="sis-header-top" style="display: none !important;">
                <div class="container">
                   <div class="row">
                      <div class="col-12">
@@ -56,7 +56,7 @@
                       
                       <!-- Left: Logo -->
                       <div class="sis-header-col sis-header-left">
-                         <a class="navbar-brand sisf-header-logo-link" href="/">
+                         <a class="navbar-brand sisf-header-logo-link" href="<?= SITE_URL ?>">
                             <img src="<?= SITE_URL ?>uploads/<?= $profile['pro_logo'] ?>" alt="Logo">
                          </a>
                       </div>
@@ -80,7 +80,7 @@
           <div class="sis-sidebar-drawer" id="sidebarDrawer">
              <div class="sis-sidebar-header d-flex align-items-center justify-content-between">
                 <div class="sis-sidebar-logo">
-                   <a href="/">
+                    <a href="<?= SITE_URL ?>">
                       <img src="<?= SITE_URL ?>uploads/<?= $profile['pro_logo'] ?>" alt="Logo">
                    </a>
                 </div>
@@ -157,7 +157,7 @@ if(!empty($contact['con_youtube'])) {
                 <i class="fa-solid fa-xmark"></i>
              </button>
              <div class="sis-search-form-container">
-                <form role="search" method="get" class="sis-search-form" action="/">
+                <form role="search" method="get" class="sis-search-form" action="<?= SITE_URL ?>">
                    <div class="sis-search-input-group">
                       <input type="search" class="sis-search-field" placeholder="Search products or services..." value="" name="s" id="searchField" autocomplete="off" />
                       <button type="submit" class="sis-search-submit-btn" aria-label="Submit Search">

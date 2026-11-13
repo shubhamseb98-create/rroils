@@ -1939,7 +1939,7 @@
 	}
 
 	.sisf-about-contents.sisf-e-page-hover-contents .sisf-m-icon img {
-		filter: brightness(0) invert(0);
+		filter: brightness(0) invert(1);
 		transition: 0.4s ease-in-out;
 	}
 
@@ -9118,7 +9118,7 @@
 	}
 
 	.sis-header-top {
-		display: block !important;
+		display: none !important; /* To re-enable top header, change back to: display: block !important; */
 		background: transparent !important;
 		padding: 10px 20px;
 		border-bottom: 1px solid #ffffff3b !important;

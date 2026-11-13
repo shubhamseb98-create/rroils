@@ -21,7 +21,6 @@ if ($result && $result->success) {
         $cb_name  = trim($_POST['cb_name']  ?? '');
         $type  = trim($_POST['type']  ?? '');
         $quantity  = trim($_POST['quantity']  ?? '');
-        $category  = trim($_POST['category']  ?? '');
         
         $errors = [];
 
@@ -126,12 +125,6 @@ if ($result && $result->success) {
             if (!empty($type)) {
                 $body .= '<p style="margin:0 0 10px 0;">
                             <strong>Enquiry Type:</strong> ' . nl2br(htmlspecialchars($type)) . '
-                          </p>';
-            }
-
-            if (!empty($category)) {
-                $body .= '<p style="margin:0 0 10px 0;">
-                            <strong>Category Of Interest:</strong> ' . nl2br(htmlspecialchars($category)) . '
                           </p>';
             }
 

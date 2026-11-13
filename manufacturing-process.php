@@ -119,67 +119,6 @@ if($i % 2 != 0){
 <?php } ?>
    <!-- ===== Steps Section End ===== -->
 
-
-   <!-- ===== YouTube Video Section ===== -->
-   <section class="pl-youtube-section py-5 overflow-hidden" style="background-color: #f8f9fa;">
-      <div class="container py-4">
-         <div class="row justify-content-center mb-4">
-             <div class="col-lg-8 text-center" data-aos="fade-up" data-aos-delay="100">
-               <div class="sisf-sis-section-title sis-section-title mb-0">
-                  <span class="about-label-box"><?= $manufacturingExtra['subheading'] ?></span>
-                  <h2 class="sisf-m-title sis-text-anime-style-3"><?= $manufacturingExtra['heading1'] ?> <span class="sisf-e-colored"><?= $manufacturingExtra['heading2'] ?></span></h2>
-               </div>
-            </div>
-         </div>
-         <div class="row" data-aos="fade-up" data-aos-delay="200">
-            <div class="col-12 sis-comman-swiper-slider">
-               <!-- Swiper -->
-               <div class="swiper">
-                  <div class="swiper-wrapper pb-5">
-                     
-<?php
-$tblYoutubeVideo = mysqli_query($conn, "SELECT * FROM tbl_youtubevideo WHERE `status` = '1' ORDER BY `sort`");
-if(mysqli_num_rows($tblYoutubeVideo) > 0){
-   while($rowYoutubeVideo = mysqli_fetch_assoc($tblYoutubeVideo)){
-?>
-                     <!-- Slide 1 -->
-                     <div class="swiper-slide">
-                        <div class="video-wrapper swiper-no-swiping rounded-4 overflow-hidden shadow-sm position-relative" style="background: #000; border: 2px solid #fff; height: 350px;">
-                           <iframe class="w-100 h-100" src="https://www.youtube.com/embed/<?= $rowYoutubeVideo['video']; ?>?rel=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                     </div>
-<?php } } ?>
-                  </div>
-                  <!-- Add Pagination & Navigation -->
-                  <style>
-                     .custom-video-nav .swiper-button-next,
-                     .custom-video-nav .swiper-button-prev {
-                        width: 45px;
-                        height: 45px;
-                        border-radius: 50%;
-                        background-color: var(--main-color);
-                        color: #fff;
-                        position: static;
-                        margin-top: 0;
-                     }
-                     .custom-video-nav .swiper-button-next::after,
-                     .custom-video-nav .swiper-button-prev::after {
-                        font-size: 18px;
-                        font-weight: bold;
-                     }
-                  </style>
-                  <div class="d-flex justify-content-center align-items-center mt-4 position-relative custom-video-nav" style="gap: 15px;">
-                     <div class="swiper-button-prev"></div>
-                     <div class="swiper-pagination position-static w-auto mx-3 mt-0"></div>
-                     <div class="swiper-button-next"></div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </section>
-   <!-- ===== YouTube Video Section End ===== -->
-
    <!-- ===== CTA Section ===== -->
    <section class="py-5" style="background-color: rgba(252, 183, 0, 0.05);">
       <div class="container py-4">

@@ -89,7 +89,6 @@ $tblHomeExtraResult = mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM tbl_
                <div class="col-lg-6">
                 
                  <div class="sisf-sis-section-title sis-section-title">
-                   <span class="about-label-box"><?= $tblHomeAbout['heading'] ?? '' ?></span>
                      <h2 class="sisf-m-title sis-text-anime-style-3"> <?= $tblHomeAbout['subheading'] ?? '' ?> </h2>
                      <div class="sisf-m-text">
                         <?= $tblHomeAbout['content'] ?? '' ?>
@@ -441,20 +440,13 @@ if(mysqli_num_rows($tblManufacturingCTA2) > 0){
          <!-- Global Outreach Section Start -->
       <div class="sis-global-outreach-section sisf-sis-comman-background sis-br-radius section">
          <div class="container">
-            <div class="row align-items-end gy-4">
-               <div class="col-lg-7">
+            <div class="row gy-4">
+               <div class="col-lg-8">
                   <div class="sisf-sis-section-title sis-section-title">
-                     <span class="sisf-m-subtitle text-white sis-text-anime-style-3"><?= $manufacturingCTA2['subheading']; ?></span>
                      <h2 class="sisf-m-title sis-text-anime-style-3 text-white"><?= $manufacturingCTA2['heading']; ?></h2>
                      <div class="sisf-m-text" data-aos="fade-up" data-aos-delay="100">
                         <p class="text-white"><?= $manufacturingCTA2['content']; ?></p>
                      </div>
-                  </div>
-               </div>
-               <div class="col-lg-5 text-lg-end">
-                  <div class="sisf-global-badge" data-aos="fade-up" data-aos-delay="200">
-                     <span class="sisf-global-badge-icon"><i class="fa-solid fa-industry"></i></span>
-                     <span><?= $manufacturingCTA2['main_heading']; ?></span>
                   </div>
                </div>
             </div>
@@ -822,29 +814,6 @@ if(mysqli_num_rows($tblHomeContact) > 0) {
                                  <div class="form-group mb-0">
                                     <label class="form-label fw-bold text-dark mb-1" style="font-size: 0.9rem;">Monthly Quantity Requirement</label>
                                     <input type="text" class="form-control bg-white border rounded-3 px-3 py-2" name="quantity" placeholder="e.g. 10,000 units/month" style="border-color: #dee2e6 !important;">
-                                 </div>
-                              </div>
-
-                              <div class="col-12">
-                                 <div class="form-group mb-0">
-                                    <label class="form-label fw-bold text-dark mb-2 d-block" style="font-size: 0.9rem;">Category of Interest *</label>
-                                    <div class="d-flex flex-wrap gap-2">
-                                       <input type="radio" class="btn-check" name="category" id="cat1" value="Hygiene" autocomplete="off" checked>
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat1" style="font-size: 0.85rem; border-color: #eee; color:#fcb700;">Hygiene</label>
-                                        
-                                        <input type="radio" class="btn-check" name="category" id="cat2" value="Home Care" autocomplete="off">
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat2" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Home Care</label>
-                                        
-                                        <input type="radio" class="btn-check" name="category" id="cat3" value="Healthcare" autocomplete="off">
-                                        <label class="btn btn-outline-warning rounded-pill px-4 py-1" for="cat3" style="font-size: 0.85rem; border-color: #eee; color: #fcb700;">Healthcare</label>
-                                    </div>
-                                    <style>
-                                       .btn-check:checked + .btn-outline-warning {
-                                          background-color: var(--main-color);
-                                          border-color: var(--main-color);
-                                          color: white;
-                                       }
-                                    </style>
                                  </div>
                               </div>
 
