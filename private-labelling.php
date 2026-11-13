@@ -98,21 +98,47 @@ if(mysqli_num_rows($tblPackageVariant) > 0) {
          <div class="row align-items-center">
             <div class="col-lg-4">
 <?php
-$tblPackageVariantDetails = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 0, 5");
-if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
-    while($tblPackageVariantDetailsRow = mysqli_fetch_assoc($tblPackageVariantDetails)) {
+$tblPackageVariantDetails = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` ASC, `id` ASC LIMIT 0, 7");
+$leftItems = [];
+if ($tblPackageVariantDetails && mysqli_num_rows($tblPackageVariantDetails) > 0) {
+    while ($r = mysqli_fetch_assoc($tblPackageVariantDetails)) {
+        $leftItems[] = $r;
+    }
+}
+$hasNewContent = false;
+foreach ($leftItems as $it) {
+    if (stripos($it['packname'], 'Expeller') !== false || stripos($it['packname'], 'Ground nut') !== false) {
+        $hasNewContent = true;
+        break;
+    }
+}
+if (!$hasNewContent) {
+    $leftItems = [
+        ['packname' => 'Kachi ghani mustard Oil', 'pack_weight' => ''],
+        ['packname' => 'Expeller Mustard Oil', 'pack_weight' => ''],
+        ['packname' => 'Refined Soyabean Oil', 'pack_weight' => ''],
+        ['packname' => 'Refined Ricebran Oil', 'pack_weight' => ''],
+        ['packname' => 'Refined Sunflower Oil', 'pack_weight' => ''],
+        ['packname' => 'Ground nut Oil', 'pack_weight' => ''],
+        ['packname' => 'Multi source edible oil', 'pack_weight' => ''],
+    ];
+}
+
+foreach ($leftItems as $tblPackageVariantDetailsRow) {
 ?>
-               <!-- Card 1 -->
+               <!-- Item -->
                <div class="sisf-e-page-hover-contents pb-1 mb-2" data-aos="fade-right" data-aos-delay="100">
                   <div class="sis-e-inner">
-                     <div class="d-flex gap-4 justify-content-end">
+                     <div class="d-flex gap-4 justify-content-end align-items-center">
                         <div class="sisf-m-contents">
-                           <div class="sis-e-title mb-1">
-                              <h3><?= $tblPackageVariantDetailsRow['packname'] ?></h3>
+                           <div class="sis-e-title mb-0">
+                              <h3><?= htmlspecialchars($tblPackageVariantDetailsRow['packname']) ?></h3>
                            </div>
+                           <?php if (!empty($tblPackageVariantDetailsRow['pack_weight'])) { ?>
                            <div class="sis-e-text text-lg-end">
-                              <p class="mb-0"><?= $tblPackageVariantDetailsRow['pack_weight'] ?></p>
+                              <p class="mb-0"><?= htmlspecialchars($tblPackageVariantDetailsRow['pack_weight']) ?></p>
                            </div>
+                           <?php } ?>
                         </div>
                         <div class="sisf-m-icon">
                            <figure>
@@ -122,7 +148,7 @@ if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
                      </div>
                   </div>
                </div>
-<?php } } ?>
+<?php } ?>
             </div>
 
             <div class="col-lg-4">
@@ -135,31 +161,56 @@ if(mysqli_num_rows($tblPackageVariantDetails) > 0) {
 
             <div class="col-lg-4 mt-4 mt-md-0">
 <?php
-$tblPackageVariantDetails1 = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` LIMIT 5, 5");
-if(mysqli_num_rows($tblPackageVariantDetails1) > 0) {
-    while($tblPackageVariantDetailsRow1 = mysqli_fetch_assoc($tblPackageVariantDetails1)) {
+$tblPackageVariantDetails1 = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` ASC, `id` ASC LIMIT 7, 20");
+$rightItems = [];
+if ($tblPackageVariantDetails1 && mysqli_num_rows($tblPackageVariantDetails1) > 0) {
+    while ($r = mysqli_fetch_assoc($tblPackageVariantDetails1)) {
+        $rightItems[] = $r;
+    }
+}
+$hasNewRight = false;
+foreach ($rightItems as $it) {
+    if (stripos($it['packname'], 'Pet Bottles') !== false || stripos($it['packname'], 'HDPE') !== false || stripos($it['packname'], 'tankers') !== false) {
+        $hasNewRight = true;
+        break;
+    }
+}
+if (!$hasNewRight) {
+    $rightItems = [
+        ['packname' => 'Pet Bottles', 'pack_weight' => ''],
+        ['packname' => 'Flexible pouches', 'pack_weight' => ''],
+        ['packname' => 'HDPE Containers', 'pack_weight' => ''],
+        ['packname' => 'Tin Containers', 'pack_weight' => ''],
+        ['packname' => 'Customized retail and Bulk packaging', 'pack_weight' => ''],
+        ['packname' => 'bulk supplies in tankers', 'pack_weight' => ''],
+    ];
+}
+
+foreach ($rightItems as $tblPackageVariantDetailsRow1) {
 ?>               
-               <!-- Card 6 -->
+               <!-- Item -->
                <div class="sisf-e-page-hover-contents pb-1 mb-2" data-aos="fade-left" data-aos-delay="350">
                   <div class="sis-e-inner">
-                     <div class="d-flex gap-4">
+                     <div class="d-flex gap-4 align-items-center">
                         <div class="sisf-m-icon">
                            <figure>
                                <img src="<?= SITE_URL ?>images/oilsize.png" class="img-fluid">
                            </figure>
                         </div>
                         <div class="sisf-m-contents">
-                           <div class="sis-e-title mb-1">
-                              <h3><?= $tblPackageVariantDetailsRow1['packname'] ?></h3>
+                           <div class="sis-e-title mb-0">
+                              <h3><?= htmlspecialchars($tblPackageVariantDetailsRow1['packname']) ?></h3>
                            </div>
+                           <?php if (!empty($tblPackageVariantDetailsRow1['pack_weight'])) { ?>
                            <div class="sis-e-text">
-                              <p class="mb-0"><?= $tblPackageVariantDetailsRow1['pack_weight'] ?></p>
+                              <p class="mb-0"><?= htmlspecialchars($tblPackageVariantDetailsRow1['pack_weight']) ?></p>
                            </div>
+                           <?php } ?>
                         </div>
                      </div>
                   </div>
                </div>
-<?php } } ?>
+<?php } ?>
             </div>
          </div>
       </div>
