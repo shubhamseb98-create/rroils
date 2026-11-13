@@ -159,7 +159,7 @@ foreach ($leftItems as $tblPackageVariantDetailsRow) {
                </div>
             </div>
 
-            <div class="col-lg-4 mt-4 mt-md-0">
+            <div class="col-lg-4 mt-4 mt-md-0 align-self-start">
 <?php
 $tblPackageVariantDetails1 = mysqli_query($conn, "SELECT packname,pack_weight FROM `tbl_package_var` WHERE status = '1' ORDER BY `sort` ASC, `id` ASC LIMIT 7, 20");
 $rightItems = [];
