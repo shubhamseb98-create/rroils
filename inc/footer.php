@@ -40,7 +40,7 @@ if(!empty($contact['con_youtube'])) { ?>
                               </ul>
                            </div>
                      </div>
-                     <div class="col-lg-5 col-md-6">
+                     <div class="col-lg-3 col-md-6">
                         <!-- Links Start -->
                         <div class="footer-links page">
                            <h3 class="text-white">Quick Links</h3>
@@ -69,22 +69,38 @@ if(!empty($contact['con_youtube'])) { ?>
                         </div>
                         <!-- Links End -->
                      </div>
-                     <div class="col-lg-3 col-md-6">
+                     <div class="col-lg-5 col-md-6">
                         <!-- Links Start -->
                         <div class="footer-links page">
                            <h3 class="text-white">Contact Details</h3>
                            <ul class="list-unstyled">
+                              <li class="d-flex gap-3 mb-2">
+                                 <i class="fa-solid fa-envelope mt-1" style="color: var(--main-color, #fcb700);"></i>
+                                 <a href="mailto:<?= !empty($contact['con_email1']) ? $contact['con_email1'] : 'manish@rroils.com' ?>" class="text-white"><?= !empty($contact['con_email1']) ? $contact['con_email1'] : 'manish@rroils.com' ?></a>
+                              </li>
+                              <?php if (!empty($contact['con_email2'])) { ?>
                               <li class="d-flex gap-3 mb-3">
                                  <i class="fa-solid fa-envelope mt-1" style="color: var(--main-color, #fcb700);"></i>
-                                 <a href="mailto:<?= $contact['con_email1'] ?>" class="text-white"><?= $contact['con_email1'] ?></a>
+                                 <a href="mailto:<?= $contact['con_email2'] ?>" class="text-white"><?= $contact['con_email2'] ?></a>
                               </li>
+                              <?php } ?>
                               <li class="d-flex gap-3 mb-3">
                                  <i class="fa-solid fa-phone mt-1" style="color: var(--main-color, #fcb700);"></i>
-                                 <a href="tel:<?= $contact['con_phone1'] ?>" class="text-white"><?= $contact['con_phone1'] ?></a>
+                                 <div>
+                                    <a href="tel:<?= !empty($contact['con_phone1']) ? $contact['con_phone1'] : '9799033331' ?>" class="text-white"><?= !empty($contact['con_phone1']) ? $contact['con_phone1'] : '9799033331' ?></a>
+                                    <?php if (!empty($contact['con_phone2'])) { ?>
+                                    <span class="text-white mx-1">|</span>
+                                    <a href="tel:<?= $contact['con_phone2'] ?>" class="text-white"><?= $contact['con_phone2'] ?></a>
+                                    <?php } ?>
+                                 </div>
+                              </li>
+                              <li class="d-flex gap-3 mb-2">
+                                 <i class="fa-solid fa-location-dot mt-1" style="color: var(--main-color, #fcb700);"></i>
+                                 <span class="text-white"><?= !empty($contact['con_address']) ? $contact['con_address'] : 'E-102, RIICO IND Area, Khairthal, Rajasthan - 301404' ?></span>
                               </li>
                               <li class="d-flex gap-3 mb-3">
                                  <i class="fa-solid fa-location-dot mt-1" style="color: var(--main-color, #fcb700);"></i>
-                                 <span class="text-white"><?= $contact['con_address'] ?></span>
+                                 <span class="text-white"><?= !empty($contact['con_address2']) ? $contact['con_address2'] : 'C-202, Agro Food Park, MIA, Alwar, Rajasthan - 301030' ?></span>
                               </li>
                            </ul>
                         </div>

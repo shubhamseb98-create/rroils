@@ -128,11 +128,12 @@ if(isset($_POST['subcontact'])){
 	$email1=mysqli_real_escape_string($conn,$_POST['email1']);
 	$email2=mysqli_real_escape_string($conn,$_POST['email2']);
 	$address=mysqli_real_escape_string($conn,$_POST['address']);
+	$address2=mysqli_real_escape_string($conn,$_POST['address2'] ?? '');
   $details=mysqli_real_escape_string($conn,$_POST['details']);
   $office_hours=mysqli_real_escape_string($conn,$_POST['office_hours']);
 	$map=mysqli_real_escape_string($conn,$_POST['location']);
-	$actionQ="UPDATE tbl_contact SET con_phone1 = '$phone1', con_phone2='$phone2', con_email1='$email1', con_email2='$email2', con_address='$address', con_map='$map', con_detail = '$details', con_office_hours = '$office_hours' WHERE con_id =1";
-    $action=mysqli_multi_query($conn,$actionQ);
+	$actionQ="UPDATE tbl_contact SET con_phone1 = '$phone1', con_phone2='$phone2', con_email1='$email1', con_email2='$email2', con_address='$address', con_address2='$address2', con_map='$map', con_detail = '$details', con_office_hours = '$office_hours' WHERE con_id =1";
+    $action=mysqli_query($conn,$actionQ);
      if($action==true){
 		$_SESSION['success']="Contact successfully updated";	
 		header("refresh: 1;");
@@ -243,8 +244,12 @@ if(isset($_POST['subdetail'])){
                                                                                       <td><strong><?php echo $root['con_email1'];?>, <?php echo $root['con_email2'];?></strong></td>
                                                                                   </tr>
                                                                                   <tr>
-                                                                                      <td><strong>Address</strong></td>
+                                                                                      <td><strong>Address 1 (Forms & Footer)</strong></td>
                                                                                       <td><strong><?php echo $root['con_address'];?></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                      <td><strong>Address 2 (Footer)</strong></td>
+                                                                                      <td><strong><?php echo $root['con_address2'] ?? '';?></strong></td>
                                                                                   </tr>
                                           
                                                                                   <tr>
@@ -557,8 +562,12 @@ if(isset($_POST['subdetail'])){
                                 </div>
                                 
                                  <div class="form-group">
-                                  <label for="address">Address</label>
-                                  <textarea class="form-control" name="address"><?php echo $root['con_address'];?></textarea>
+                                  <label for="address">Address 1 (Forms & Footer)</label>
+                                  <textarea class="form-control" name="address" rows="3"><?php echo $root['con_address'];?></textarea>
+                                </div>
+                                <div class="form-group">
+                                  <label for="address2">Address 2 (Footer)</label>
+                                  <textarea class="form-control" name="address2" rows="3"><?php echo $root['con_address2'] ?? '';?></textarea>
                                 </div>
                                 
                                 <div class="form-group">

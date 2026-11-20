@@ -62,6 +62,12 @@ if ($bannerTableCheck && mysqli_num_rows($bannerTableCheck) > 0) {
     }
 }
 
+// Auto-migrate tbl_contact columns if not present
+$contactColCheck = mysqli_query($conn, "SHOW COLUMNS FROM `tbl_contact` LIKE 'con_address2'");
+if (!$contactColCheck || mysqli_num_rows($contactColCheck) == 0) {
+    mysqli_query($conn, "ALTER TABLE `tbl_contact` ADD COLUMN `con_address2` TEXT NULL AFTER `con_address`");
+}
+
 // Auto-create tbl_started_header if not exists
 $headerTableCheck = mysqli_query($conn, "SHOW TABLES LIKE 'tbl_started_header'");
 if (!$headerTableCheck || mysqli_num_rows($headerTableCheck) == 0) {
