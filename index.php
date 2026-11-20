@@ -709,10 +709,9 @@ if(mysqli_num_rows($tblHomeContact) > 0) {
                                   </div>
                                   <div class="sisf-sis-e-content">
                                      <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">PHONE</span>
-                                     <a href="tel:<?= $contact['con_phone1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone1'] ?></a>
+                                     <div><a href="tel:<?= $contact['con_phone1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone1'] ?></a></div>
                                      <?php if (!empty($contact['con_phone2'])) { ?>
-                                        <span class="text-dark mx-1">|</span>
-                                        <a href="tel:<?= $contact['con_phone2'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone2'] ?></a>
+                                        <div><a href="tel:<?= $contact['con_phone2'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone2'] ?></a></div>
                                      <?php } ?>
                                   </div>
                                </div>
