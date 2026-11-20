@@ -75,56 +75,63 @@ if(mysqli_num_rows($tblHomeContact) > 0) {
                      <div class="sisf-sis-contact-information p-4 rounded-4 shadow-sm w-100" style="background-color: #fcfcfc; border: 1px solid #e9ecef;">
                         <div class="row g-4">
                            <!-- Phone -->
-                           <div class="col-sm-6">
-                              <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
-                                 <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
-                                    <a href="tel:<?= $contact['con_phone1'] ?>" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-solid fa-phone-volume"></i></a>
-                                 </div>
-                                 <div class="sisf-sis-e-content">
-                                    <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">PHONE</span>
-                                    <a href="tel:<?= $contact['con_phone1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone1'] ?></a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Email -->
-                           <div class="col-sm-6">
-                              <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
-                                 <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
-                                    <a href="mailto:<?= $contact['con_email1'] ?>" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-regular fa-envelope"></i></a>
-                                 </div>
-                                 <div class="sisf-sis-e-content">
-                                    <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">EMAIL</span>
-                                    <a href="mailto:<?= $contact['con_email1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_email1'] ?></a>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Location -->
-                           <div class="col-sm-6">
-                              <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
+                            <div class="col-sm-6">
+                               <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
+                                  <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
+                                     <a href="tel:<?= $contact['con_phone1'] ?>" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-solid fa-phone-volume"></i></a>
+                                  </div>
+                                  <div class="sisf-sis-e-content">
+                                     <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">PHONE</span>
+                                     <a href="tel:<?= $contact['con_phone1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone1'] ?></a>
+                                     <?php if (!empty($contact['con_phone2'])) { ?>
+                                        <span class="text-dark mx-1">|</span>
+                                        <a href="tel:<?= $contact['con_phone2'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_phone2'] ?></a>
+                                     <?php } ?>
+                                  </div>
+                               </div>
+                            </div>
+                            <!-- Email -->
+                            <div class="col-sm-6">
+                               <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
+                                  <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
+                                     <a href="mailto:<?= $contact['con_email1'] ?>" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-regular fa-envelope"></i></a>
+                                  </div>
+                                  <div class="sisf-sis-e-content">
+                                     <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">EMAIL</span>
+                                     <div><a href="mailto:<?= $contact['con_email1'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_email1'] ?></a></div>
+                                     <?php if (!empty($contact['con_email2'])) { ?>
+                                        <div><a href="mailto:<?= $contact['con_email2'] ?>" class="text-dark text-decoration-none" style="font-size: 0.95rem;"><?= $contact['con_email2'] ?></a></div>
+                                     <?php } ?>
+                                  </div>
+                               </div>
+                            </div>
+                            <!-- Location 1 -->
+                            <div class="col-sm-6">
+                               <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
 
-                                 <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
-                                    <a href="tel:+17674539988" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-solid fa-location-dot"></i></a>
-                                 </div>
+                                  <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
+                                     <span style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-solid fa-location-dot"></i></span>
+                                  </div>
 
-                                 <div class="sisf-sis-e-content">
-                                    <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">LOCATION</span>
-                                    <span class="text-dark" style="font-size: 0.95rem;"><?= $contact['con_address'] ?></span>
-                                 </div>
-                              </div>
-                           </div>
-                           <!-- Office Hours -->
-                           <div class="col-sm-6">
-                              <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
-                              <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
-                                    <a href="tel:+17674539988" style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-regular fa-clock"></i></a>
-                                 </div>
+                                  <div class="sisf-sis-e-content">
+                                     <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">LOCATION</span>
+                                     <span class="text-dark" style="font-size: 0.95rem;"><?= !empty($contact['con_address']) ? $contact['con_address'] : 'E-102, RIICO IND Area, Khairthal, Rajasthan - 301404' ?></span>
+                                  </div>
+                               </div>
+                            </div>
+                            <!-- Location 2 (Replaced Office Hours) -->
+                            <div class="col-sm-6">
+                               <div class="sisf-contact-box d-flex align-items-center gap-3 w-100">
+                                  <div class="sisf-icon d-flex justify-content-center align-items-center rounded-circle flex-shrink-0" style="width: 50px; height: 50px; background-color: var(--main-color);">
+                                     <span style="color: #fcb700; font-size: 1.2rem; display: flex;"><i class="fa-solid fa-location-dot"></i></span>
+                                  </div>
 
-                                 <div class="sisf-sis-e-content">
-                                    <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">OFFICE HOURS</span>
-                                    <span class="text-dark" style="font-size: 0.95rem;"><?= $contact['con_office_hours'] ?></span>
-                                 </div>
-                              </div>
-                           </div>
+                                  <div class="sisf-sis-e-content">
+                                     <span class="sis-title d-block fw-bold mb-1" style="color: #495057; font-size: 0.85rem; letter-spacing: 0.5px;">LOCATION</span>
+                                     <span class="text-dark" style="font-size: 0.95rem;"><?= !empty($contact['con_address2']) ? $contact['con_address2'] : 'C-202, Agro Food Park, MIA, Alwar, Rajasthan - 301030' ?></span>
+                                  </div>
+                               </div>
+                            </div>
                         </div>
                      </div>
                   </div>

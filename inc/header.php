@@ -104,20 +104,36 @@
                 <div class="sis-sidebar-info">
                    <h4 class="sis-info-title">Contact Details</h4>
                    <ul class="list-unstyled sis-info-list">
-                      <li>
-                         <a href="tel:<?= $contact['con_phone1'] ?>">
-                            <i class="fa-solid fa-phone"></i> <?= $contact['con_phone1'] ?>
-                         </a>
-                      </li>
-                      <li>
-                         <a href="mailto:<?= $contact['con_email1'] ?>">
-                            <i class="fa-regular fa-envelope"></i> <?= $contact['con_email1'] ?>
-                         </a>
-                      </li>
-                      <li>
-                         <i class="fa-solid fa-location-dot"></i> <span><?= $contact['con_address'] ?></span>
-                      </li>
-                   </ul>
+                       <li>
+                          <a href="tel:<?= !empty($contact['con_phone1']) ? $contact['con_phone1'] : '9799033331' ?>">
+                             <i class="fa-solid fa-phone"></i> <?= !empty($contact['con_phone1']) ? $contact['con_phone1'] : '9799033331' ?>
+                          </a>
+                          <?php if (!empty($contact['con_phone2'])) { ?>
+                             <span class="text-white mx-1">|</span>
+                             <a href="tel:<?= $contact['con_phone2'] ?>"><?= $contact['con_phone2'] ?></a>
+                          <?php } ?>
+                       </li>
+                       <li>
+                          <a href="mailto:<?= !empty($contact['con_email1']) ? $contact['con_email1'] : 'manish@rroils.com' ?>">
+                             <i class="fa-regular fa-envelope"></i> <?= !empty($contact['con_email1']) ? $contact['con_email1'] : 'manish@rroils.com' ?>
+                          </a>
+                       </li>
+                       <?php if (!empty($contact['con_email2'])) { ?>
+                       <li>
+                          <a href="mailto:<?= $contact['con_email2'] ?>">
+                             <i class="fa-regular fa-envelope"></i> <?= $contact['con_email2'] ?>
+                          </a>
+                       </li>
+                       <?php } ?>
+                       <li>
+                          <i class="fa-solid fa-location-dot"></i> <span><?= !empty($contact['con_address']) ? $contact['con_address'] : 'E-102, RIICO IND Area, Khairthal, Rajasthan - 301404' ?></span>
+                       </li>
+                       <?php if (!empty($contact['con_address2'])) { ?>
+                       <li>
+                          <i class="fa-solid fa-location-dot"></i> <span><?= $contact['con_address2'] ?></span>
+                       </li>
+                       <?php } ?>
+                    </ul>
                    
                    <!-- Social Media -->
                    <div class="sis-sidebar-socials">
